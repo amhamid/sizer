@@ -4,12 +4,14 @@
     <title>Capture Photo</title>
   </head>
   <body>
+    <button onclick="myCustomCamera();">Custom Photo</button> <br>
     <button onclick="capturePhoto();">Capture Photo</button> <br>
     <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
     <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
     <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
     <img style="display:none;" id="largeImage" src="" />
+
 
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -96,6 +98,18 @@
     // 
     function onFail(message) {
       alert('Failed because: ' + message);
+    }
+
+    function myCustomCamera() {
+      navigator.customCamera.getPicture(filename, function success(fileUri) {
+          alert("File location: " + fileUri);
+      }, function failure(error) {
+          alert(error);
+      }, {
+          quality: 80,
+          targetWidth: 120,
+          targetHeight: 120
+      });
     }
 
     </script>
